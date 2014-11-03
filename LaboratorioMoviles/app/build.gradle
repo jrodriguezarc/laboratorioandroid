@@ -23,4 +23,5 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile files('libs/Parse-1.7.1.jar')
     compile project(':facebook')
+    compile files('libs/twitter4j-core-4.0.2.jar')
 }

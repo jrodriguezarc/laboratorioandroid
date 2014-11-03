@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -41,6 +42,9 @@ import android.content.pm.Signature;
 
 public class FoodMenu extends FragmentActivity {
 
+    SharedPreferences pref;
+    private static String CONSUMER_KEY = "FfyMjUIL3nGVio9BpJ2oQ2Cng";
+    private static String CONSUMER_SECRET = "ToaCif1DhavQQeJbWmrUAiLU9Pyu99PJKpEQNyrrLvA7gkgMRU";
 
     private TextView lblEmail;
     private UiLifecycleHelper uiHelper;
@@ -104,9 +108,12 @@ public class FoodMenu extends FragmentActivity {
                                 @Override
                                 public void onCompleted(GraphUser user, Response response) {
                                     if (user != null) {
+
                                         Log.i("log_tag", "User ID " + user.getId());
                                         Log.i("log_tag", "Email " + user.asMap().get("email"));
-                                        lblEmail.setText(user.asMap().get("email").toString());
+
+                                        lblEmail.setText("Bienvenido "  + user.asMap().get("email").toString() + "!!");
+
                                     }
                                 }
                             });
@@ -114,6 +121,21 @@ public class FoodMenu extends FragmentActivity {
                     Log.i("log_tag", "Nopes Token");
             }
         });
+
+
+
+
+        pref = getPreferences(0);
+        SharedPreferences.Editor edit = pref.edit();
+        edit.putString("CONSUMER_KEY", CONSUMER_KEY);
+        edit.putString("CONSUMER_SECRET", CONSUMER_SECRET);
+        edit.commit();
+        Fragment login = new LoginFragment();
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.replace(R.id.content_frame, login);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.addToBackStack(null);
+        ft.commit();
 
 
     }
