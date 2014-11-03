@@ -12,5 +12,9 @@
     <string name="add_name">Name</string>
     <string name="add_desc">Description</string>
     <string name="add_type">Tipo</string>
+    <string name="app_id">1572344216322844</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_title">Buscar</string>
+
 
 </resources>
